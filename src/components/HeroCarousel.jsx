@@ -1,251 +1,246 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import {
-  FaChevronLeft,
-  FaChevronRight,
-  FaLeaf,
-  FaPlaceOfWorship,
-  FaBook,
-  FaHistory,
-  FaMedal,
-  FaStar,
-} from "react-icons/fa";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const HeroCarousel = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
-    {
-      id: 1,
-      title: "Kolhapur Jain Math",
-      highlighted: "Kolhapur",
-      subtitle:
-        "A historic center of Jain learning and spirituality in Maharashtra",
-      image: "./12.jpg",
-      cta1: "/kolhapur-legacy",
-      cta2: "/kolhapur-events",
-      icon: <FaPlaceOfWorship />,
-    },
-    {
-      id: 2,
-      title: "Nandani Jain Math",
-      highlighted: "Nandani",
-      subtitle: "The spiritual heart of Jain tradition and teachings",
-      image: "./hero2.jpg",
-      cta1: "/nandani-legacy",
-      cta2: "/nandani-events",
-      icon: <FaBook />,
-    },
-    {
-      id: 3,
-      title: "Belagavi Jain Heritage",
-      highlighted: "Belagavi",
-      subtitle:
-        "Home to ancient Kamal Basadi and magnificent Jain architecture",
-      image: "./hero4.jpg",
-      cta1: "/belagavi-heritage",
-      cta2: "/belagavi-events",
-      icon: <FaHistory />,
-    },
-    {
-      id: 4,
-      title: "Terdal Jain Temples",
-      highlighted: "Terdal",
-      subtitle:
-        "Sacred temples showcasing exquisite craftsmanship and devotion",
-      image: "./hero1.jpg",
-      cta1: "/terdal-temples",
-      cta2: "/terdal-events",
-      icon: <FaMedal />,
-    },
+    { id: 1, image: "./12.jpg" },
+    { id: 2, image: "./hero2.jpg" },
+    { id: 3, image: "./hero4.jpg" },
+    { id: 4, image: "./hero1.jpg" },
   ];
 
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 4000);
     return () => clearInterval(timer);
   }, [slides.length]);
 
   const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () =>
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  const goToSlide = (index) => setCurrentSlide(index);
 
   return (
-    <div className="relative min-h-[80vh] sm:min-h-[70vh] lg:min-h-[85vh] overflow-hidden bg-gradient-to-br from-background via-accent to-secondary">
-      {/* Floating Particles */}
-      <div className="absolute inset-0 pointer-events-none z-0">
-        {[...Array(15)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute animate-float"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 5}s`,
-              animationDuration: `${3 + Math.random() * 4}s`,
-            }}
-          >
-            <FaStar
-              className="text-secondary opacity-20"
-              size={Math.random() * 10 + 6}
-            />
-          </div>
-        ))}
-      </div>
-
-      {/* Slides */}
-      {slides.map((slide, index) => (
-        <div
-          key={index}
-          className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
-            index === currentSlide
-              ? "opacity-100 scale-100"
-              : "opacity-0 scale-105"
-          }`}
-        >
-          <div className="absolute inset-0">
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url(${slide.image})` }}
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-background/70 to-accent/70"></div>
-              <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-accent to-transparent"></div>
-              <div className="absolute top-20 left-20 w-32 h-32 rounded-full border-4 border-accent opacity-30 animate-spin-slow"></div>
-              <div className="absolute bottom-28 right-24 w-40 h-40 rounded-full border-4 border-secondary opacity-30 animate-pulse"></div>
-              <div className="absolute top-1/2 left-1/4 transform -translate-x-1/2 -translate-y-1/2 w-32 h-32 border-4 border-accent opacity-20 rounded-full">
-                <div className="absolute inset-4 border-2 border-secondary rounded-full"></div>
+    <div className="relative w-full h-screen flex justify-center">
+      {/* Main Container */}
+      <div className="relative w-full ">
+        
+        {/* Image Container with Card Design */}
+        <div className="relative">
+          <div className="relative overflow-hidden shadow-xl" style={{ height: '80vh' }}>
+            {slides.map((slide, index) => (
+              <div
+                key={slide.id}
+                className={`absolute inset-0 transition-all duration-1000 ease-in-out ${
+                  index === currentSlide
+                    ? 'opacity-100 translate-x-0 z-10'
+                    : index > currentSlide
+                    ? 'opacity-0 translate-x-full z-0'
+                    : 'opacity-0 -translate-x-full z-0'
+                }`}
+              >
+                <img
+                  src={slide.image}
+                  alt={`Slide ${slide.id}`}
+                  className="w-full h-full object-cover"
+                />
+                
+                {/* Gradient overlay */}
+                <div className="absolute inset-0" style={{
+                  background: `linear-gradient(135deg, 
+                    rgba(237, 163, 90, 0.1) 0%, 
+                    transparent 30%, 
+                    transparent 70%, 
+                    rgba(255, 213, 79, 0.1) 100%)`
+                }}></div>
               </div>
+            ))}
+
+            {/* Floating Navigation */}
+            <button
+              onClick={prevSlide}
+              className="absolute left-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-20 group"
+              style={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              <ChevronLeft className="group-hover:-translate-x-0.5 transition-transform" style={{ color: '#EDA35A' }} size={24} />
+            </button>
+
+            <button
+              onClick={nextSlide}
+              className="absolute right-6 top-1/2 -translate-y-1/2 w-14 h-14 rounded-full flex items-center justify-center transition-all duration-300 hover:scale-110 z-20 group"
+              style={{ 
+                backgroundColor: 'rgba(255, 255, 255, 0.9)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)'
+              }}
+            >
+              <ChevronRight className="group-hover:translate-x-0.5 transition-transform" style={{ color: '#EDA35A' }} size={24} />
+            </button>
+          </div>
+
+          {/* Bottom Navigation Panel */}
+          <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 md:flex items-center gap-4 px-8 py-4 rounded-2xl z-20 hidden sm:block" style={{
+            backgroundColor: '#FFFFFF',
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+            border: `2px solid rgba(237, 163, 90, 0.2)`
+          }}>
+            {/* Thumbnail Images */}
+            <div className="flex gap-3">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.id}
+                  onClick={() => goToSlide(index)}
+                  className={`relative w-16 h-16 rounded-xl overflow-hidden transition-all duration-300 ${
+                    index === currentSlide
+                      ? 'scale-110 ring-3 ring-offset-2'
+                      : 'hover:scale-105 opacity-70 hover:opacity-100'
+                  }`}
+                  style={{
+                    ringColor: index === currentSlide ? '#EDA35A' : 'transparent',
+                    ringOffsetColor: '#FFFFFF'
+                  }}
+                >
+                  <img
+                    src={slide.image}
+                    alt={`Thumb ${slide.id}`}
+                    className="w-full h-full object-cover"
+                  />
+                  {index === currentSlide && (
+                    <div className="absolute inset-0 border-2 rounded-xl" style={{ borderColor: '#EDA35A' }}></div>
+                  )}
+                </button>
+              ))}
             </div>
 
-            {/* Content */}
-            <div className="relative z-10 container mx-auto px-6 py-16 h-full flex flex-col justify-center">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-                <div className="text-center lg:text-left">
-                  <div className="inline-block mb-6 bg-background px-5 py-2 rounded-full border border-accent shadow-sm">
-                    <p className="text-primary font-medium flex items-center justify-center lg:justify-start text-sm sm:text-base">
-                      <FaLeaf className="mr-2 text-primary/60" />
-                      Embracing Ahimsa Since 1952
-                    </p>
+            {/* Divider */}
+            <div className="w-px h-8 mx-2" style={{ backgroundColor: 'rgba(237, 163, 90, 0.3)' }}></div>
+
+            {/* Dot Indicators */}
+            <div className="flex gap-2">
+              {slides.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => goToSlide(index)}
+                  className="relative"
+                >
+                  <div
+                    className={`rounded-full transition-all duration-500 ${
+                      index === currentSlide ? 'w-8 h-3' : 'w-3 h-3 hover:scale-125'
+                    }`}
+                    style={{
+                      backgroundColor: index === currentSlide ? '#EDA35A' : 'rgba(237, 163, 90, 0.3)'
+                    }}
+                  >
+                    {index === currentSlide && (
+                      <div 
+                        className="absolute inset-0 rounded-full animate-pulse"
+                        style={{ backgroundColor: '#FFD54F' }}
+                      ></div>
+                    )}
                   </div>
+                </button>
+              ))}
+            </div>
 
-                  <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-text mb-6 leading-tight">
-                    <span className="font-light">
-                      {slide.title.split(" ")[0]}
-                    </span>{" "}
-                    <span className="text-primary font-semibold">
-                      {slide.highlighted}
-                    </span>{" "}
-                    <span className="font-medium">
-                      {slide.title.split(" ").slice(2).join(" ")}
-                    </span>
-                  </h1>
+            {/* Counter */}
+            <div className="w-px h-8 mx-2" style={{ backgroundColor: 'rgba(237, 163, 90, 0.3)' }}></div>
+            <div className="px-3 py-1 rounded-lg text-sm font-semibold" style={{
+              backgroundColor: 'rgba(237, 163, 90, 0.1)',
+              color: '#333333'
+            }}>
+              {currentSlide + 1} / {slides.length}
+            </div>
+          </div>
 
-                  <p className="text-base md:text-lg lg:text-xl text-text/80 max-w-2xl mx-auto lg:mx-0 mb-8 font-light leading-relaxed">
-                    {slide.subtitle}
-                  </p>
+          {/* Mobile Navigation */}
+          <div className="sm:hidden absolute -bottom-20 left-1/2 -translate-x-1/2 z-20">
+            <div className="container rounded-2xl p-4 items-center" style={{
+            backgroundColor: '#FFFFFF',
+            boxShadow: '0 20px 40px rgba(0, 0, 0, 0.1)',
+            border: `2px solid rgba(237, 163, 90, 0.2)`
+          }}>
+            {/* Mobile Thumbnails */}
+            <div className="flex justify-center gap-2 mb-4 overflow-x-auto pb-2">
+              {slides.map((slide, index) => (
+                <button
+                  key={slide.id}
+                  onClick={() => goToSlide(index)}
+                  className={`flex-shrink-0 relative w-14 h-14 rounded-xl overflow-hidden transition-all duration-300 ${
+                    index === currentSlide
+                      ? 'scale-110 ring-2 ring-offset-1'
+                      : 'hover:scale-105 opacity-70'
+                  }`}
+                  style={{
+                    ringColor: index === currentSlide ? '#EDA35A' : 'transparent',
+                    ringOffsetColor: '#fffbf5'
+                  }}
+                >
+                  <img
+                    src={slide.image}
+                    alt={`Thumb ${slide.id}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
 
-                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-                    <Link
-                      to={slide.cta1}
-                      className="inline-flex items-center justify-center bg-primary hover:bg-secondary text-white font-medium py-3 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
-                    >
-                      Discover Our Legacy
-                    </Link>
-                    <Link
-                      to={slide.cta2}
-                      className="inline-flex items-center justify-center bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-medium py-3 px-6 rounded-full transition-all duration-300 shadow-lg hover:shadow-xl text-sm sm:text-base"
-                    >
-                      View Events
-                    </Link>
-                  </div>
+            {/* Mobile Control Panel */}
+            <div className="flex items-center justify-center">
+              <div className="flex items-center gap-4 px-6 py-3 rounded-2xl" style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.95)',
+                backdropFilter: 'blur(10px)',
+                boxShadow: '0 10px 30px rgba(0, 0, 0, 0.15)',
+                border: `1px solid rgba(237, 163, 90, 0.2)`
+              }}>
+                <button
+                  onClick={prevSlide}
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-transform hover:scale-110"
+                  style={{ backgroundColor: '#EDA35A', color: '#FFFFFF' }}
+                >
+                  <ChevronLeft size={16} />
+                </button>
+
+                <div className="flex gap-1.5">
+                  {slides.map((_, index) => (
+                    <button
+                      key={index}
+                      onClick={() => goToSlide(index)}
+                      className={`rounded-full transition-all duration-300 ${
+                        index === currentSlide ? 'w-6 h-2.5' : 'w-2.5 h-2.5'
+                      }`}
+                      style={{
+                        backgroundColor: index === currentSlide ? '#EDA35A' : 'rgba(237, 163, 90, 0.4)'
+                      }}
+                    />
+                  ))}
                 </div>
 
-                 {/* Symbol */}
-                <div className="hidden lg:flex justify-center">
-                  <div className="relative">
-                    <div className="w-72 h-72 flex items-center justify-center bg-white/90 rounded-full shadow-2xl border-8 border-accent relative overflow-hidden">
-                      {/* Mandala pattern */}
-                      <div className="absolute inset-0 opacity-10">
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-secondary"></div>
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 rounded-full border-4 border-primary/40"></div>
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-28 h-28 rounded-full border-4 border-secondary"></div>
-                        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full border-4 border-primary/50"></div>
-                      </div>
-
-                      <div className="text-secondary text-8xl z-10">
-                        <img src="/counter-shape.png" alt="Shape" />
-                      </div>
-                    </div>
-
-                    {/* Rotating rings */}
-                    <div className="absolute -ins-6 rounded-full border-4 border-accent opacity-60 animate-spin-slow"></div>
-                    <div className="absolute -ins-12 rounded-full border-2 border-primary/90 opacity-40 animate-spin-medium"></div>
-
-                    {/* Floating elements */}
-                    <div className="absolute -top-4 -right-4 w-12 h-12 rounded-full bg-accent opacity-70 animate-float"></div>
-                    <div className="absolute -bottom-4 -left-4 w-10 h-10 rounded-full bg-primary opacity-70 animate-float-reverse"></div>
-                  </div>
+                <div className="px-2 py-0.5 rounded-md text-xs font-semibold" style={{
+                  backgroundColor: 'rgba(237, 163, 90, 0.1)',
+                  color: '#333333'
+                }}>
+                  {currentSlide + 1}/{slides.length}
                 </div>
+
+                <button
+                  onClick={nextSlide}
+                  className="w-9 h-9 rounded-full flex items-center justify-center transition-transform hover:scale-110"
+                  style={{ backgroundColor: '#EDA35A', color: '#FFFFFF' }}
+                >
+                  <ChevronRight size={16} />
+                </button>
               </div>
+            </div>
             </div>
           </div>
         </div>
-      ))}
+      </div>
 
-      {/* Navigation */}
-      <button
-        onClick={prevSlide}
-        className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-2 sm:p-3 rounded-full backdrop-blur-lg border border-white/20 transition-all duration-300 z-20 group hover:scale-105"
-      >
-        <FaChevronLeft size={18} />
-      </button>
-
-      <button
-        onClick={nextSlide}
-        className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 bg-white/10 hover:bg-white/20 text-white p-2 sm:p-3 rounded-full backdrop-blur-lg border border-white/20 transition-all duration-300 z-20 group hover:scale-105"
-      >
-        <FaChevronRight size={18} />
-      </button>
-
-      {/* Animations */}
-      <style jsx>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-15px);
-          }
-        }
-        @keyframes spin-slow {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-        @keyframes bounce-slow {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-8px);
-          }
-        }
-        .animate-float {
-          animation: float 6s ease-in-out infinite;
-        }
-        .animate-spin-slow {
-          animation: spin-slow 25s linear infinite;
-        }
-        .animate-bounce-slow {
-          animation: bounce-slow 5s ease-in-out infinite;
-        }
-      `}</style>
+       
     </div>
   );
 };
