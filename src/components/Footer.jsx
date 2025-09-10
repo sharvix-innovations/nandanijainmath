@@ -28,15 +28,15 @@ const Footer = () => {
           </div>
 
           {/* Newsletter Input */}
-          <form className="w-full lg:w-1/2 flex">
+          <form className="w-full lg:w-1/2 flex flex-col sm:flex-row">
             <input
               type="email"
               placeholder="Enter your email"
-              className="flex-grow px-4 py-3 rounded-l-md text-black focus:outline-none"
+              className="flex-grow px-4 py-3 rounded-t-md sm:rounded-l-md sm:rounded-tr-none text-black focus:outline-none"
             />
             <button
               type="submit"
-              className="bg-secondary text-black font-semibold px-6 py-3 rounded-r-md shadow hover:bg-secondary/90 transition"
+              className="bg-secondary text-black font-semibold px-6 py-3 rounded-b-md sm:rounded-r-md sm:rounded-bl-none shadow hover:bg-secondary/90 transition"
             >
               Subscribe
             </button>

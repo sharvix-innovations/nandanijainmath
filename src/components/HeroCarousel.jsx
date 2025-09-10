@@ -23,7 +23,7 @@ const HeroCarousel = () => {
   const goToSlide = (index) => setCurrentSlide(index);
 
   return (
-    <div className="relative w-full h-screen flex justify-center">
+    <div className="relative w-full flex justify-center">
       {/* Main Container */}
       <div className="relative w-full ">
         

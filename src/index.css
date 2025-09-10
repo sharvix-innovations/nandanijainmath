@@ -1,3 +1,47 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Google Translate banner iframe full hide */
+.goog-te-banner-frame.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0px !important; /* Google translate top offset remove */
+}
+
+
+/* 🔥 "Powered by Google" आणि इतर default text hide */
+.goog-logo-link,
+.goog-te-gadget span,
+.goog-te-gadget-simple img,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+
+/* 🔥 Dropdown चं styling सुधार */
+.goog-te-gadget {
+  font-size: 0 !important; /* default "Select Language" text hide */
+}
+
+.goog-te-gadget-simple {
+  background: white !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 6px !important;
+  padding: 6px 10px !important;
+  font-family: inherit !important;
+  font-size: 14px !important;
+  color: #374151 !important;
+  display: inline-block !important;
+  cursor: pointer !important;
+}
+
+/* Google Translate Top Frame hide */
+.goog-te-banner-frame, .skiptranslate {
+  display: none !important;
+  visibility: hidden !important;
+} 
+body {
+  top: 0px !important;
+}
