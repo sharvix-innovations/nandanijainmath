@@ -161,28 +161,6 @@ const Gallery = () => {
         <div className="absolute top-40 right-20 w-8 h-8 bg-accent/20 rounded-full animate-ping"></div>
       </section>
 
-      {/* Stats Section */}
-      <section className="py-12 bg-accent -mt-10 relative z-10">
-        <div className="container mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {[
-              { number: "500+", label: "Photos", icon: <Camera /> },
-              { number: "50+", label: "Events", icon: <Calendar /> },
-              { number: "10+", label: "Festivals", icon: <GiOpenBook /> },
-              { number: "1000+", label: "Devotees", icon: <Users /> }
-            ].map((stat, i) => (
-              <div key={i} className="bg-white rounded-2xl p-6 text-center shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
-                <div className="bg-primary text-white rounded-full w-12 h-12 flex items-center justify-center mx-auto mb-3">
-                  {stat.icon}
-                </div>
-                <div className="text-2xl md:text-3xl font-bold text-primary mb-1">{stat.number}</div>
-                <div className="text-gray-600 text-sm">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Filter Categories */}
       <section className="py-12 bg-white">
         <div className="container mx-auto px-6">

@@ -3,9 +3,11 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import Contact from "../pages/Contact";
 import Gallery from "../pages/Gallery";
+import Donation from "../pages/Donation";
+import Events from "../pages/Events";
 
-export const publicRoutes= [
-{
+export const publicRoutes = [
+  {
     id: "1",
     name: "Home",
     link: allRoutes.home,
@@ -29,6 +31,16 @@ export const publicRoutes= [
     link: allRoutes.gallery,
     element: <Gallery />,
   },
-
-
-]
+  {
+    id: "5",
+    name: "Donation",
+    link: allRoutes.donation,
+    element: <Donation />,
+  },
+  {
+    id: "6",
+    name: "Events",
+    link: allRoutes.events,
+    element: <Events/>,
+  },
+];

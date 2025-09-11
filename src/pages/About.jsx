@@ -6,11 +6,7 @@ import {
   GiTempleGate,
   GiFlowerPot,
 } from "react-icons/gi";
-import {
-  FaBookOpen,
-  FaBalanceScale,
-  FaUserTie
-} from "react-icons/fa";
+import { FaBookOpen, FaBalanceScale, FaUserTie } from "react-icons/fa";
 
 const About = () => {
   // Our History Timeline
@@ -333,42 +329,6 @@ const About = () => {
         </div>
       </section>
 
-      {/* Leadership Section */}
-      <section className="py-20 bg-accent">
-        <div className="container mx-auto px-6">
-          <div className="text-center mb-16">
-            <p className="text-primary font-semibold uppercase flex items-center justify-center gap-2 mb-3">
-              <FaUserTie className="text-primary" /> Leadership
-            </p>
-            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6 font-heading">
-              Our Guiding Lights
-            </h2>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            {leadership.map((leader, index) => (
-              <div key={index} className="text-center group">
-                <div className="relative overflow-hidden rounded-2xl shadow-lg mb-6">
-                  <img
-                    src={leader.image}
-                    alt={leader.name}
-                    className="w-full h-80 object-cover transition-transform duration-[1300ms] ease-in-out group-hover:scale-110"
-                  />
-                  <div className="pointer-events-none absolute left-1/2 top-1/2 w-[200%] h-0 bg-white/30 -translate-x-1/2 -translate-y-1/2 -rotate-45 transition-all duration-[600ms] ease-linear group-hover:h-[250%] group-hover:bg-transparent"></div>
-                </div>
-                <h3 className="text-xl font-bold text-primary mb-2">
-                  {leader.name}
-                </h3>
-                <p className="text-secondary font-semibold mb-3">
-                  {leader.position}
-                </p>
-                <p className="text-gray-600 text-sm">{leader.description}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Mission & Vision Section */}
       <section className="py-20 bg-gradient-to-b from-primary to-primary/80 text-white">
         <div className="container mx-auto px-6">
@@ -402,6 +362,42 @@ const About = () => {
                 peace and harmony.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Leadership Section */}
+      <section className="py-20 bg-accent">
+        <div className="container mx-auto px-6">
+          <div className="text-center mb-16">
+            <p className="text-primary font-semibold uppercase flex items-center justify-center gap-2 mb-3">
+              <FaUserTie className="text-primary" /> Leadership
+            </p>
+            <h2 className="text-4xl lg:text-5xl font-bold text-primary mb-6 font-heading">
+              Our Guiding Lights
+            </h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            {leadership.map((leader, index) => (
+              <div key={index} className="text-center group">
+                <div className="relative overflow-hidden rounded-2xl shadow-lg mb-6">
+                  <img
+                    src={leader.image}
+                    alt={leader.name}
+                    className="w-full h-80 object-cover transition-transform duration-[1300ms] ease-in-out group-hover:scale-110"
+                  />
+                  <div className="pointer-events-none absolute left-1/2 top-1/2 w-[200%] h-0 bg-white/30 -translate-x-1/2 -translate-y-1/2 -rotate-45 transition-all duration-[600ms] ease-linear group-hover:h-[250%] group-hover:bg-transparent"></div>
+                </div>
+                <h3 className="text-xl font-bold text-primary mb-2">
+                  {leader.name}
+                </h3>
+                <p className="text-secondary font-semibold mb-3">
+                  {leader.position}
+                </p>
+                <p className="text-gray-600 text-sm">{leader.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
